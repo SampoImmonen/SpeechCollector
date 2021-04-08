@@ -1,0 +1,18 @@
+
+.appcontainer {
+    width: 100%;
+    padding: 50px;
+    align-content: center;
+
+}
+
+.sitecontainer {
+    height: auto;
+    width: 75%;;
+}
+
+.fixed-center {
+    position: static;
+    bottom: 10;
+    left: 0;
+}
