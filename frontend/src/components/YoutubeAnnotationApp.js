@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import YoutubeInputForm from './YoutubeInputForm'
 import YoutubeTranscription from './YoutubeTranscription'
 
+
+import {trackPromise} from 'react-promise-tracker'
 import axios from 'axios';
 
 class YoutubeAnnotationApp extends Component {
@@ -15,6 +17,9 @@ class YoutubeAnnotationApp extends Component {
     handleUrlSubmit = (url) => {
         let formdata = new FormData()
         formdata.append('url', url)
+
+
+        trackPromise(
         axios.post('/videofromurl', formdata, {responseType:'blob', headers: {'content-type' : 'multipart/form-data'}})
         .then((response) => {
             if(response) {
@@ -25,6 +30,7 @@ class YoutubeAnnotationApp extends Component {
                 this.setState({video : blob, name: title, video_length:length})
             }
         })
+        )
     }
 
     getComponent = () => {
@@ -33,7 +39,11 @@ class YoutubeAnnotationApp extends Component {
                 <YoutubeInputForm handleSubmit={this.handleUrlSubmit}/>
             )
         } else {
-            return <YoutubeTranscription video={this.state.video} title={this.state.name}/>
+            return <YoutubeTranscription 
+            video={this.state.video} 
+            title={this.state.name}
+            vidlength={this.state.video_length}
+            />
         }
     }
 
@@ -43,6 +53,7 @@ class YoutubeAnnotationApp extends Component {
                 <h1 className="ui segment lifted">Youtube Transcription App</h1>
                 <div className="ui center aligned container segment lifted">
                     {this.getComponent()}
+                    
                 </div>
             </div>
         );

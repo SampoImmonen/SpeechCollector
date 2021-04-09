@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LoadingIndicator from './LoadingIndicator'
 
 class YoutubeInputForm extends Component {
 
@@ -29,6 +30,7 @@ class YoutubeInputForm extends Component {
             <div>
                 <form className="ui form">
                     <h1>Upload Youtube Url</h1>
+                    <LoadingIndicator/>
                     <div className="field">
                         <label>Youtube Url</label>
                         <input type="text" 

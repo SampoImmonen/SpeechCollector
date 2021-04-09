@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Form
 from fastapi.responses import FileResponse
+from videotools import getaudioclipcmd
 import pytube
 
 app = FastAPI()
@@ -32,3 +33,11 @@ def fromyoutube(url: str = Form(...)):
     response.headers['length'] = str(video_length)
     return response
     
+
+@app.post("/clipaudio")
+def clipaudio(start: int = Form(...), end: int = Form(...)):
+    print(start)
+    print(end)
+    getaudioclipcmd(start, end)
+    return FileResponse('clipaudio.mp3')
+
