@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import YoutubeInputForm from './YoutubeInputForm'
 import YoutubeTranscription from './YoutubeTranscription'
-
+import VideoPreview from './VideoPreview'
 
 import {trackPromise} from 'react-promise-tracker'
 import axios from 'axios';
@@ -33,17 +33,26 @@ class YoutubeAnnotationApp extends Component {
         )
     }
 
+    handleDelete = () => {
+        this.setState({name: '', video: null, video_length: null})
+    }
+
     getComponent = () => {
         if (this.state.video===null){
             return( 
                 <YoutubeInputForm handleSubmit={this.handleUrlSubmit}/>
             )
         } else {
-            return <YoutubeTranscription 
-            video={this.state.video} 
-            title={this.state.name}
-            vidlength={this.state.video_length}
-            />
+            return (
+            <div>
+                <VideoPreview video={this.state.video} title={this.state.name}/>
+                <YoutubeTranscription 
+                video={this.state.video} 
+                title={this.state.name}
+                vidlength={this.state.video_length}
+                handleDelete={this.handleDelete}/>
+            </div>
+            );
         }
     }
 

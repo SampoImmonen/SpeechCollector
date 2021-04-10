@@ -36,6 +36,12 @@ class AudioPreview extends Component {
                         {this.formatTime(this.props.start) + '  -  ' + this.formatTime(this.props.end)}
                     </div>
                     {this.getComponent()}
+                    <div>
+                        <label className="ui label">Transcript</label>
+                    </div>
+                    <div className="ui container">
+                        <b>{this.props.transcription}</b>
+                    </div>
                 </div>
             </div>
         );

@@ -12,7 +12,7 @@ class TranscriptionForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        
+        this.props.handleSubmit(this.state.text)
     }
 
     render() {
@@ -27,7 +27,10 @@ class TranscriptionForm extends Component {
                         onChange={this.handleChange}
                         />
                     </div>
-                    <button className="ui basic button" onClick={this.handleSubmit}>Save</button>
+                    <button className="ui basic black button" 
+                    onClick={this.handleSubmit}
+                    disabled={!this.props.isaudioclip}
+                    >Add transcription</button>
                 </form>
             </div>
         );
