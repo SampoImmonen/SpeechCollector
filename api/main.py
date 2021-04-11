@@ -4,13 +4,17 @@ from videotools import getaudioclipcmd
 
 from audio2numpy import open_audio
 import pytube
+import os
+import uuid
+import shutil
 
 app = FastAPI()
 
 title = ""
 video_state = ""
-audio_dir = "audiofiles/"
-recordings_dir ="recordings/"
+youtube_dir = "youtubefiles/"
+recordings_dir = "recordings/"
+ 
 
 
 @app.get("/test")
@@ -47,13 +51,25 @@ def clipaudio(start: int = Form(...), end: int = Form(...)):
     return FileResponse('clipaudio.mp3')
 
 def save_transcript(transcription, file_path):
-    pass
+    with open(file_path, 'w',encoding="utf-8") as f:
+        f.write(transcription)
+    return
 
-def generate_unique_path():
-    pass
+
+def generate_unique_path(mode):
+
+    exist = True
+    while exist:
+        filename = str(uuid.uuid4())
+        filepath = filename+'.mp3'
+        path = os.path.join(mode, "audio", filepath)
+        exist = os.path.exists(path)
+    return path, filename
+
 
 def save_audio_file(path):
-    pass
+    shutil.copy("clipaudio.mp3", path)
+    return
 
 
 @app.post("/saveclip")
@@ -63,5 +79,10 @@ def saveaudio(audiofile: UploadFile = Form(...), transcription: str = Form(...))
     # copy clipaudio with the new path
     # sace transcript filepath pair
     # 
-    print(transcription)
-    return {'a': 'ok'}
+
+    audiopath, filename = generate_unique_path("youtube")
+    save_audio_file(audiopath)
+
+    transcript_path = os.path.join("youtube", "transcripts", filename+'.txt')
+    save_transcript(transcription, transcript_path)
+    return {'audiopath': audiopath, 'transcript_path': transcript_path}

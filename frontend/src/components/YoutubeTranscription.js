@@ -68,9 +68,7 @@ class YoutubeTranscription extends Component {
 
         axios.post('/saveclip', formdata ,{headers: {'content-type':'multipart/form-data'}})
         .then((response) => {
-            if (response){
-                console.log(response)
-            }
+            then(this.setState({clipaudio:null, transcription: '', previewmode:false})
         })
     }
 
