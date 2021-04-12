@@ -48,7 +48,7 @@ def fromyoutube(url: str = Form(...)):
     
 
 @app.post("/clipaudio")
-def clipaudio(start: int = Form(...), end: int = Form(...)):
+def clipaudio(start: float = Form(...), end: float = Form(...)):
     print(start)
     print(end)
     getaudioclipcmd(start, end)
@@ -90,6 +90,7 @@ def saveaudio(audiofile: UploadFile = Form(...), transcription: str = Form(...))
     transcript_path = os.path.join("youtube", "transcripts", filename+'.txt')
     save_transcript(transcription, transcript_path)
     return {'audiopath': audiopath, 'transcript_path': transcript_path}
+
 @app.get("/getinfo")
 def getinfo():
     #get information about how much audio you have
