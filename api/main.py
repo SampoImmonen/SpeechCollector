@@ -1,12 +1,15 @@
 from fastapi import FastAPI, Form, UploadFile
 from fastapi.responses import FileResponse
+
 from videotools import getaudioclipcmd
+from infotools import get_amount_of_data, get_number_of_files 
 
 from audio2numpy import open_audio
 import pytube
 import os
 import uuid
 import shutil
+
 
 app = FastAPI()
 
@@ -38,7 +41,8 @@ def fromyoutube(url: str = Form(...)):
     
     title = video.title
     response = FileResponse('video.mp4')
-    response.headers['title'] = title
+    print("täällä")
+    response.headers['title'] = str(title)
     response.headers['length'] = str(video_length)
     return response
     
@@ -86,3 +90,13 @@ def saveaudio(audiofile: UploadFile = Form(...), transcription: str = Form(...))
     transcript_path = os.path.join("youtube", "transcripts", filename+'.txt')
     save_transcript(transcription, transcript_path)
     return {'audiopath': audiopath, 'transcript_path': transcript_path}
+@app.get("/getinfo")
+def getinfo():
+    #get information about how much audio you have
+    # how many clips from youtube
+    # how many gigabytes 
+    # same for own transcripts
+    num_files = get_number_of_files('youtube/audio')
+    size = get_amount_of_data('youtube/audio')
+
+    return {'num_clips': num_files, 'size':size}
