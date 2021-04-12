@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import YoutubeAnnotationApp from './YoutubeAnnotationApp'
 import InfoApp from './InfoApp'
+import RecordingApp from './RecordingApp'
 import './component.css'
 
 class NavigationContainer extends Component {
@@ -16,6 +17,9 @@ class NavigationContainer extends Component {
         if (this.state.app === 'info') {
             return <InfoApp/>
         }
+        if (this.state.app === 'recorder') {
+            return <RecordingApp />
+        }
     }
 
     handleChangeApp = (e) => {
@@ -28,7 +32,7 @@ class NavigationContainer extends Component {
                 <div className="two wide column">
                     <div className="ui vertical menu">
                         <a className="item" name="youtube" onClick={this.handleChangeApp}>YoutubeApp</a>
-                        <a className="item">RecordingApp</a>
+                        <a className="item" name="recorder" onClick={this.handleChangeApp}>RecordingApp</a>
                         <a className="item" name="info" onClick={this.handleChangeApp}>InfoApp</a>
                     </div>
                 </div>
