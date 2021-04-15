@@ -22,7 +22,7 @@ class RecorderAudioPreview extends Component {
                         <label className="ui label">Transcript</label>
                     </div>
                     <div className="ui container">
-                        <b>{this.props.transcription}</b>
+                        <b>{this.props.transcript}</b>
                     </div>
                 </div>
             </div>

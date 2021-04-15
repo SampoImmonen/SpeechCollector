@@ -9,7 +9,9 @@ import pytube
 import os
 import uuid
 import shutil
-
+import io
+from pydub import AudioSegment
+from pydub.playback import play
 
 app = FastAPI()
 
@@ -101,3 +103,25 @@ def getinfo():
     size = get_amount_of_data('youtube/audio')
 
     return {'num_clips': num_files, 'size':size}
+
+
+import json
+
+@app.post('/uploadfile')
+def uploadfile(data: UploadFile = Form(...)):
+    data.file.seek(0)
+    contents = data.file.read()
+    sentences = contents.decode('utf-8').splitlines()
+    return sentences
+
+
+@app.post('/saverecording')
+def saverecording(transcript: str = Form(...), audio: UploadFile = Form(...)):
+    clip = AudioSegment.from_file(io.BytesIO(audio.file.read()), format="mp3")
+    
+    audiopath, filename = generate_unique_path("recordings")
+    clip.export(audiopath, format="mp3")
+    transcript_path = os.path.join("recordings", "transcripts", filename+'.txt')
+    save_transcript(transcript, transcript_path)
+
+    return {'a', 'ok'}
