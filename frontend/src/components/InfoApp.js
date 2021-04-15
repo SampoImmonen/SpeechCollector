@@ -20,9 +20,10 @@ class InfoApp extends Component {
                 <div className="ui center aligned container segment lifted">
                     <div className="ui segment lifted">
                     <h3>Simple stats</h3>
-                    <p>number of audiofiles from youtube:  {this.state.info.num_clips}</p>
-                    <p>goal filled {this.state.goal.num_clips}/{this.state.info.num_clips}</p>
-                    <p>size of audio data from youtube: {this.state.info.size/10**6} Mb</p>
+                    <p>number of audiofiles from youtube:  {this.state.info.num_clips_youtube}</p>
+                    <p>number of audiofiles from recordings:  {this.state.info.num_clips_records}</p>
+                    <p>goal filled {this.state.goal.num_clips}/{this.state.info.num_clips_youtube+this.state.info.num_clips_records}</p>
+                    <p>size of audio data from youtube: {(this.state.info.size_records+this.state.info.size_youtube)/10**6} Mb</p>
                     </div>
                     <div className="ui segment lifted">
                         <h3>Data distribution</h3>

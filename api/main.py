@@ -99,10 +99,12 @@ def getinfo():
     # how many clips from youtube
     # how many gigabytes 
     # same for own transcripts
-    num_files = get_number_of_files('youtube/audio')
-    size = get_amount_of_data('youtube/audio')
+    num_files_youtube = get_number_of_files('youtube/audio')
+    size_youtube = get_amount_of_data('youtube/audio')
+    num_files_records = get_number_of_files('recordings/audio')
+    size_records = get_amount_of_data('recordings/audio')
 
-    return {'num_clips': num_files, 'size':size}
+    return {'num_clips_youtube': num_files_youtube, 'size_youtube':size_youtube, 'num_clips_records':num_files_records, 'size_records': size_records}
 
 
 import json
