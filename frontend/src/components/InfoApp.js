@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+
+import Chart from "react-google-charts";
+
 import axios from 'axios';
 
 class InfoApp extends Component {
@@ -27,7 +30,39 @@ class InfoApp extends Component {
                     </div>
                     <div className="ui segment lifted">
                         <h3>Data distribution</h3>
-                        <p>Pie chart here</p>
+                        <Chart
+                            width={'500px'}
+                            height={'300px'}
+                            chartType="PieChart"
+                            loader={<div>Loading Chart</div>}
+                            data={[
+                                ['Source', 'Clips'],
+                                ['Youtube', this.state.info.num_clips_youtube],
+                                ['Recordings', this.state.info.num_clips_records]
+                            ]
+                            }
+                        />
+                    </div>
+                    <div className="ui segment lifted">
+                        <h3>Goal</h3>
+                        <Chart
+                            width={'500px'}
+                            height={'300px'}
+                            chartType="PieChart"
+                            loader={<div>Loading Chart</div>}
+                            data={[
+                                ['Segment', 'Clips'],
+                                ['Gathered', this.state.info.num_clips_youtube+this.state.info.num_clips_records],
+                                ['Todo', 4000-this.state.info.num_clips_youtube+this.state.info.num_clips_records]
+                            ]
+                            }
+                            options={{
+                                slices:{
+                                    0: { color: 'black'},
+                                    1: {color: 'white'}
+                                }
+                            }}
+                        />
                     </div>
                 </div>
             </div>
