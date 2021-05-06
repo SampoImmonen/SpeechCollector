@@ -53,7 +53,7 @@ class InfoApp extends Component {
                             data={[
                                 ['Segment', 'Clips'],
                                 ['Gathered', this.state.info.num_clips_youtube+this.state.info.num_clips_records],
-                                ['Todo', 4000-this.state.info.num_clips_youtube+this.state.info.num_clips_records]
+                                ['Todo', 4000-(this.state.info.num_clips_youtube+this.state.info.num_clips_records)]
                             ]
                             }
                             options={{

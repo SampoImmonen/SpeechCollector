@@ -12,6 +12,7 @@ class YoutubeTranscription extends Component {
         end: 0,
         transcription: '',
         previewmode: false,
+        num_clips: 0
     }
 
     handleClipSubmit = (values) => {
@@ -68,7 +69,7 @@ class YoutubeTranscription extends Component {
 
         axios.post('/saveclip', formdata ,{headers: {'content-type':'multipart/form-data'}})
         .then((response) => {
-            this.setState({clipaudio:null, transcription: '', previewmode:false})
+            this.setState({clipaudio:null, transcription: '', previewmode:false, num_clips: this.state.num_clips+1})
         })
     }
 
@@ -114,6 +115,10 @@ class YoutubeTranscription extends Component {
                     <div className="ui segment">
                         <button className="ui green button" onClick={this.openValidation} disabled={!this.validateTranscript()}>Submit Transcription</button>
                         <button className="ui red button" onClick={this.handleDelete}> Delete</button>
+                    </div>
+                    <div className="ui segment">
+                        <h1>Clips during session</h1>
+                        <h2>{this.state.num_clips}</h2>
                     </div>
                 </div>
             );
