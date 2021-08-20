@@ -44,7 +44,10 @@ def fromyoutube(url: str = Form(...)):
     title = video.title
     response = FileResponse('video.mp4')
     print("täällä")
-    response.headers['title'] = str(title)
+    try:
+        response.headers['title'] = str(title)
+    except:
+        response.headers['title'] = "???"
     response.headers['length'] = str(video_length)
     return response
     
