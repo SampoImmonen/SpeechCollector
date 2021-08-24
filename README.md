@@ -16,5 +16,6 @@ if you get an error while loading a video from url
 try to update pytube
 
 ## Images:
-
+![alt text](https://github.com/SampoImmonen/SpeechCollector/blob/main/media/youtube.PNG)
+![alt text](https://github.com/SampoImmonen/SpeechCollector/blob/main/media/recording.PNG)
 
