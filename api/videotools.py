@@ -8,8 +8,6 @@ def getaudioclip(start: int, end: int):
     clip.write_audiofile("clipaudio.mp3")
     return True
 
-
-
 def getaudioclipcmd(start: int, end: int):
     subprocess.call(f"ffmpeg -y -ss {start} -i video.mp4 -to {end-start} -loglevel quiet -c copy output.mp4")
     subprocess.call("ffmpeg -y -i output.mp4 -q:a 0 -map a -loglevel quiet clipaudio.mp3")

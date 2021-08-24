@@ -24,7 +24,6 @@ class YoutubeInputForm extends Component {
         }
     }
 
-
     render() {
         return (
             <div>
